@@ -1,3 +1,5 @@
+CREATE DATABASE order_services;
+USE order_services;
 
 CREATE TABLE `orders` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
