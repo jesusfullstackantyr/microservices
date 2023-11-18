@@ -1,15 +1,16 @@
 import express, {Application} from 'express';
+import proxy from 'express-http-proxy';
+
 import dotenv from 'dotenv';
 import { Signale } from "signale";
-import { orderRouter } from './order/infraestructure/routes/orderRoutes';
 
 const app:Application = express();
 const signale = new Signale();
 
 dotenv.config();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
-app.use('/',orderRouter);
+app.use('/api/v1/orders', proxy('http://localhost:3001'));
 
 app.listen(PORT,() => {
     signale.success(`Servidor corriendo en http://localhost:${PORT}`);
