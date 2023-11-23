@@ -5,6 +5,7 @@ import { AddItemToOrderController } from "./controllers/addItemController";
 import { CreateOrderController } from "./controllers/createOrderController";
 import { PayOrderController } from "./controllers/payOrderController";
 import { MysqlRepository } from "./repositories/msqylRepository";
+import { RabbitMQ } from "./services/rabbit";
 
 
 const orderMysqlRepository = new MysqlRepository();
@@ -15,5 +16,7 @@ export const createOrderController = new CreateOrderController(createOrderUseCas
 const addItemUseCase = new AddITemToOrderUseCase(orderMysqlRepository);
 export const addItemController = new AddItemToOrderController(addItemUseCase);
 
-const payOrderUseCase = new PayOrderUseCase(orderMysqlRepository);
+const rabbitMQ = new RabbitMQ();
+
+const payOrderUseCase = new PayOrderUseCase(orderMysqlRepository,rabbitMQ);
 export const payOrderController = new PayOrderController(payOrderUseCase);

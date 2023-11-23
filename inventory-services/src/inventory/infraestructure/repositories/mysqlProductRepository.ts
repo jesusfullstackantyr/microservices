@@ -3,6 +3,14 @@ import { Product } from "../../domain/entities/Product";
 import { ProductRepository } from "../../domain/repositories/productRepository";
 
 export class MysqlProductRepository implements ProductRepository {
+    
+    async decreaseStock(productId: number, stock: number): Promise<any> {
+        let sql = "UPDATE products SET stock = stock - ? where id =  ?";
+        const params:any[] = [stock,productId];
+        const result = await query(sql,params);
+        return result;
+    }
+
     async listProducts(): Promise<Product[] | null> {
         let sql = "SELECT * FROM products WHERE status = 'AVAILABLE'";
         const [data]:any = await query(sql,[]);

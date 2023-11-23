@@ -1,12 +1,12 @@
 import amqp from 'amqplib';
 import { RabbitMQService } from '../../application/services/rabbit';
 
-export class RabbitMQAdapter implements RabbitMQService {
+export class RabbitMQ implements RabbitMQService {
     
     private connection: amqp.Connection | null = null;
 
     async connect(): Promise<void> {
-        this.connection = await amqp.connect('amqp://localhost');
+        this.connection = await amqp.connect('amqp://127.0.0.1');
     }
 
     async publishMessage(exchange: string, routingKey: string, message: any): Promise<void> {
