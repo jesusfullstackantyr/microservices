@@ -1,7 +1,9 @@
 import { AddITemToOrderUseCase } from "../application/addItemUseCase";
 import { CreateOrderUseCase } from "../application/createOrderUseCase";
+import { PayOrderUseCase } from "../application/payOrderUseCase";
 import { AddItemToOrderController } from "./controllers/addItemController";
 import { CreateOrderController } from "./controllers/createOrderController";
+import { PayOrderController } from "./controllers/payOrderController";
 import { MysqlRepository } from "./repositories/msqylRepository";
 
 
@@ -12,3 +14,6 @@ export const createOrderController = new CreateOrderController(createOrderUseCas
 
 const addItemUseCase = new AddITemToOrderUseCase(orderMysqlRepository);
 export const addItemController = new AddItemToOrderController(addItemUseCase);
+
+const payOrderUseCase = new PayOrderUseCase(orderMysqlRepository);
+export const payOrderController = new PayOrderController(payOrderUseCase);

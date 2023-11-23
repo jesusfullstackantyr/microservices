@@ -4,6 +4,13 @@ import { OrderItem } from "../../domain/entities/orderItem";
 import { OrderRepository } from "../../domain/repositories/orderRepository";
 
 export class MysqlRepository implements OrderRepository {
+    
+    async payOrder(updatedOrder: Order): Promise<Order | null> {
+        const sql = "UPDATE orders SET status = ? where id = ?";
+        const params:any[] = [updatedOrder.status,updatedOrder.id];
+        await query(sql,params);
+        return updatedOrder;
+    }
 
     async createOrder(order: Order): Promise<Order | null> {
        let sql = "INSERT INTO orders(uuid,total,status) values(?,?,?)";
@@ -21,9 +28,5 @@ export class MysqlRepository implements OrderRepository {
 
        orderItem.id = result.insertId;
        return orderItem;
-    }
-    
-    payOrder(idOrder: string): Promise<Order | null> {
-        throw new Error("Method not implemented.");
     }
 }
