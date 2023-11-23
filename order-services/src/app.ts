@@ -13,6 +13,8 @@ app.use(morgan('dev'));
 dotenv.config();
 const PORT = process.env.PORT || 3001;
 
+app.use(express.json());
+
 app.use('/',orderRouter);
 
 app.listen(PORT,() => {
