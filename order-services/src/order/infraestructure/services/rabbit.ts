@@ -17,6 +17,5 @@ export class RabbitMQ implements RabbitMQService {
         const channel = await this.connection.createChannel();
         channel.assertExchange(exchange, 'direct', { durable: false });
         channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(message)));
-        await channel.close();
     }
 }
