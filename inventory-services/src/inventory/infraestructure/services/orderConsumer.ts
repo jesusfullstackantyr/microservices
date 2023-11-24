@@ -3,7 +3,7 @@ import { OrderSold } from "../../domain/entities/OrderSold";
 import { setupRabbitMQ } from "../rabbitConfig";
 
 export async function startOrderConsumer(useCase:DecreaseSoldStockUseCase) {
-
+    
     const { connection, channel, queueName } = await setupRabbitMQ();
 
     console.log('Consumidor de Órdenes esperando mensajes...');
