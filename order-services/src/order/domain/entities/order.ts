@@ -15,11 +15,18 @@ export class Order implements ValidatableEntity {
     @IsNotEmpty()
     public status:string;
 
+    public products:any[] | null;
+
     constructor(id:number|null,total:number,status:string) {
         this.id = id;
         this.uuid = uuidv4();;
         this.total = total;
         this.status = status;
+        this.products = [];
+    }
+
+    public setProducts(products:any[]) {
+        this.products = products;
     }
 
     async validate() {

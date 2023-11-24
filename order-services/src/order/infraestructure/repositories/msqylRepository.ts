@@ -5,6 +5,14 @@ import { OrderRepository } from "../../domain/repositories/orderRepository";
 
 export class MysqlRepository implements OrderRepository {
     
+    async getOrder(orderId: number):Promise<Order | null> {
+        const sql = "SELECT * FROM orders where id = ?";
+        const params:any[] = [orderId];
+        const result = await query(sql,params);
+        let order = new Order(1,100,"PROCESS");
+        return order;
+    }
+    
     async payOrder(updatedOrder: Order): Promise<Order | null> {
         const sql = "UPDATE orders SET status = ? where id = ?";
         const params:any[] = [updatedOrder.status,updatedOrder.id];

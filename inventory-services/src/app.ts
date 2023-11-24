@@ -4,6 +4,7 @@ import { Signale } from "signale";
 import morgan from 'morgan';
 import { productRouter } from './inventory/infraestructure/routes/productRouter';
 import { drecreaseSoldStockUseCaseService } from './inventory/infraestructure/dependencies';
+import { consumeMessages } from './inventory/infraestructure/services/SagaConsumer';
 
 
 const app:Application = express();
@@ -22,6 +23,8 @@ app.use('/',productRouter);
 async function startServer() {
 
     await drecreaseSoldStockUseCaseService();
+
+    await consumeMessages();
 
     app.listen(PORT,() => {
         signale.success(`Servidor corriendo en http://localhost:${PORT}`);
