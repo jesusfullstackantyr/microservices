@@ -1,6 +1,7 @@
 import { IsNotEmpty } from "class-validator";
 import { v4 as uuidv4 } from 'uuid';
 import { ValidatableEntity } from "../validations/validatable";
+import { Email } from "./email";
 
 export class Order implements ValidatableEntity {
 
@@ -17,12 +18,15 @@ export class Order implements ValidatableEntity {
 
     public products:any[] | null;
 
-    constructor(id:number|null,total:number,status:string) {
+    public email:Email;
+
+    constructor(id:number|null,total:number,status:string, email:Email) {
         this.id = id;
         this.uuid = uuidv4();;
         this.total = total;
         this.status = status;
         this.products = [];
+        this.email = email;
     }
 
     public setProducts(products:any[]) {
